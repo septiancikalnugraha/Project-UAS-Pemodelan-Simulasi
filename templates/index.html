@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendeteksi Kematangan Pepaya</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Pendeteksi Kematangan Pepaya</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*">
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if filename %}
+    <h2>Hasil Prediksi</h2>
+
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Gambar</th>
+                <th>Prediksi</th>
+                <th>Akurasi</th>
+            </tr>
+            <tr>
+                <td><img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Hasil Upload" width="150"></td>
+                <td><strong>{{ result }}</strong></td>
+                <td><strong>{{ accuracy }}%</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="chart-container">
+        <h2>Grafik Training Model</h2>
+        <img src="{{ url_for('static', filename='images/training_results.png') }}" alt="Grafik Training">
+    </div>
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
